@@ -29,58 +29,58 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'title' => $request->title,
-            'content' => $request->content
-        ];
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:20',
+            'content' => 'required|unique:posts|max:255',
+            'status' => 'required|unique:posts|max:22',
+        ]);
 
-        Post::create($data);
+        Post::create($validated);
 
-        return redirect('/posts');
+        return redirect()->route('posts.index')->with('success', 'Sitas postiš ir uztaisits veiksmigi puik!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
         return view('posts.show', ['post' => $post]);
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::find($id);
         return view('posts.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        $post = Post::find($id);
 
-        $data = [
-            'title' => $request->title,
-            'content' => $request->content
-        ];
+        $validated = $request->validate([
+            'title' => 'required|max:20',
+            'content' => 'required|max:20',
+            'status' => 'required|max:12',
+        ]);
 
-        $post->update($data);
+        $post->update($validated);
 
-        return redirect('/posts');
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
         $post->delete();
-        return redirect('/posts');
-    }    
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
+    }
+
 }
+
