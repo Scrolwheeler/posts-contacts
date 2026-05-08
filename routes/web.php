@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactController;
 use App\Models\Car;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,3 +27,5 @@ Route::post('contacts', [ContactController::class, 'store'])->name('contacts.sto
 Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
 
 Route::get('/display-car', [CarController::class, 'display'])->name('car.display');
+
+Route::get('/display-events', [EventController::class, 'display'])->name('event.display');
