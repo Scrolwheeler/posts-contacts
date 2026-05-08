@@ -18,6 +18,7 @@ Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.ed
 Route::put('posts/{post}/update', [PostController::class, 'update'])->name('posts.update');
 Route::delete('posts/{post}/destroy', [PostController::class, 'destroy'])->name('posts.delete');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post}/duplicate', [PostController::class, 'duplicate'])->name('posts.duplicate');
 // {{route ('posts.store)}}
 
 Route::get('contacts/create', [ContactController::class, 'create'])->name('contacts.create');

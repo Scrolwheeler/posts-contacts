@@ -11,9 +11,13 @@
         <textarea name="content" id="content"></textarea>
         <br>
         <label for="status">Status: </label>
-        <input type="text" name="status" id="status"><br>
+        <select name="ststus" id="status">
+  <option value="volvo">Archived</option>
+  <option value="saab">Published</option>
+  <option value="opel">Draft</option>
+</select>
         <input type="submit" value="Create">
-
+<!-- <input type="text" name="status" id="status"><br> -->
     </form>
     @if ($errors->any())
     <div class="alert alert-danger">

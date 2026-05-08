@@ -32,7 +32,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|unique:posts|max:20',
             'content' => 'required|unique:posts|max:255',
-            'status' => 'required|unique:posts|max:22',
+            'status' => 'max:200'
         ]);
 
         Post::create($validated);
@@ -65,7 +65,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:20',
             'content' => 'required|max:20',
-            'status' => 'required|max:12',
+            'status' => 'max:12',
         ]);
 
         $post->update($validated);
@@ -80,6 +80,17 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
+    }
+
+    public function duplicate(Post $post)
+    {
+        $dupPost = Post::create([
+            'title' => "Copy of " . $post->title,
+            'content' => $post->content
+        ]);
+
+        return redirect()->route('posts.show', $dupPost)->with('success', 'Post duplicated successfully!');
+        // return view('posts.show', ['post' => $dupPost]);
     }
 
 }

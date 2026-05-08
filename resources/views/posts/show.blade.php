@@ -4,4 +4,5 @@
     <h1>Title: {{ $post->title }}</h1>
     <p>Content: {{ $post->content }}</p>
     <p>Status: {{$post->status}}</p>
+    <a href="{{ route('posts.duplicate', $post->id) }}">Dublēt</a>
 </x-app-layout>
